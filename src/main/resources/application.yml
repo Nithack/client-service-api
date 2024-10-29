@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: client-service-api
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    url: ${POSTGRES_DB_URL}
+    username: ${POSTGRES_DB_USERNAME}
+    password: ${POSTGRES_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+# logging
+logging:
+  level:
+    root: INFO
