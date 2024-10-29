@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.nithack</groupId>
-	<artifactId>client-service-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>client-service-api</name>
+	<artifactId>client-service</artifactId>
+	<version>0.0.1</version>
+	<name>client-service</name>
 	<description>Service client manager.</description>
 	<url/>
 	<licenses>
