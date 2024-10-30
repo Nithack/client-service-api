@@ -2,6 +2,7 @@ package com.nithack.clientService.infra.http.controller;
 
 import com.nithack.clientService.application.dto.ClientDTO;
 import com.nithack.clientService.application.mapper.ClientMapper;
+import com.nithack.clientService.application.port.ClientApiPort;
 import com.nithack.clientService.application.services.ClientServiceAdapter;
 import com.nithack.clientService.domain.entity.ClientEntity;
 import jakarta.validation.Valid;
@@ -24,10 +25,11 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/clients")
 @RequiredArgsConstructor
-public class ClientController {
+public class ClientController implements ClientApiPort {
 
     private final ClientServiceAdapter clientService;
 
+    @Override
     @PostMapping
     public ResponseEntity<ClientDTO> createClient(@Valid @RequestBody ClientDTO clientDTO) {
         ClientEntity clientEntity = ClientMapper.toEntity(clientDTO);
@@ -35,6 +37,7 @@ public class ClientController {
         return ResponseEntity.status(HttpStatus.CREATED).body(ClientMapper.toDTO(createdClient));
     }
 
+    @Override
     @GetMapping("/{id}")
     public ResponseEntity<ClientDTO> getClientById(@PathVariable UUID id) {
         Optional<ClientEntity> client = clientService.findById(id.toString());
@@ -42,6 +45,7 @@ public class ClientController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+    @Override
     @GetMapping
     public ResponseEntity<List<ClientDTO>> getAllClients() {
         List<ClientEntity> clients = clientService.findAll();
@@ -49,6 +53,7 @@ public class ClientController {
         return ResponseEntity.ok(clientDTOs);
     }
 
+    @Override
     @PutMapping("/{id}")
     public ResponseEntity<ClientDTO> updateClient(@PathVariable UUID id, @Valid @RequestBody ClientDTO clientDTO) {
         clientDTO.setId(id);
@@ -57,6 +62,7 @@ public class ClientController {
         return ResponseEntity.ok(ClientMapper.toDTO(updatedClient));
     }
 
+    @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable UUID id) {
         clientService.delete(id);

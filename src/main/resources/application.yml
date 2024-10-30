@@ -1,7 +1,6 @@
 spring:
   application:
     name: client-service-api
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -11,11 +10,15 @@ spring:
     username: ${POSTGRES_DB_USERNAME}
     password: ${POSTGRES_DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
-
+# Actuator
 # swagger
 springdoc:
   swagger-ui:
-    path: /swagger-ui.html
+    enabled: true
+  show-actuator: true
+  api-docs:
+    enabled: true
+    path: /api-docs
 # logging
 logging:
   level:
