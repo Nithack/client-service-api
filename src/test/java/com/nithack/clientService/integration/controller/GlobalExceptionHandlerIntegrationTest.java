@@ -55,15 +55,14 @@ class GlobalExceptionHandlerIntegrationTest {
     void shouldReturnConflictWhenClientAlreadyExists() throws Exception {
         ClientDTO clientDTO = createClientDTO();
 
-        // Simula a exceção ClientAlreadyExistsException ao tentar salvar um cliente
-        doThrow(new ClientAlreadyExistsException("Client already exists")).when(mockClientRepository).save(any());
+        doThrow(new ClientAlreadyExistsException(clientDTO.getCpf())).when(mockClientRepository).save(any());
 
         mockMvc.perform(post("/clients")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(clientDTO)))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.status").value(HttpStatus.CONFLICT.name()))
-                .andExpect(jsonPath("$.message").value("Client already exists"));
+                .andExpect(jsonPath("$.message").value("Client already exists with CPF: " + clientDTO.getCpf()));
     }
 
     @Test

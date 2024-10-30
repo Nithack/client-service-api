@@ -20,7 +20,7 @@ public class ClientEntity {
     private String name;
     private LocalDate dateOfBirth;
     private String phone;
-    private AddressModel address;
+    private AddressEntity address;
     private LocalDate createdAt;
     private LocalDate updatedAt;
 }

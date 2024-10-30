@@ -7,6 +7,7 @@ import com.nithack.clientService.application.mapper.ClientMapper;
 import com.nithack.clientService.application.port.ClientDataServicePort;
 import com.nithack.clientService.application.services.ClientDataServiceAdapter;
 import com.nithack.clientService.application.services.ClientServiceAdapter;
+import com.nithack.clientService.domain.entity.AddressEntity;
 import com.nithack.clientService.domain.entity.ClientEntity;
 import com.nithack.clientService.infra.database.model.AddressModel;
 import com.nithack.clientService.infra.database.model.ClientModel;
@@ -33,12 +34,11 @@ class ClientServiceTest {
 
     @Mock
     private ClientRepository clientRepository;
-    private ClientDataServicePort clientDataService;
     private ClientServiceAdapter clientService;
 
     @BeforeEach
     void setUp() {
-        clientDataService = new ClientDataServiceAdapter(clientRepository);
+        ClientDataServicePort clientDataService = new ClientDataServiceAdapter(clientRepository);
         clientService = new ClientServiceAdapter(clientDataService);
     }
 
@@ -47,11 +47,7 @@ class ClientServiceTest {
     void createClient_ShouldReturnClient_WhenDataIsValid() {
         final UUID idTest = UUID.randomUUID();
         ClientEntity clientEntity = getClientEntity(idTest);
-        ClientModel clientModel = ClientModel.builder()
-                .id(idTest)
-                .name(clientEntity.getName())
-                .cpf(clientEntity.getCpf())
-                .build();
+        ClientModel clientModel = getClientModel(idTest, clientEntity.getName(), clientEntity.getCpf());
 
         when(clientRepository.save(any(ClientModel.class))).thenReturn(clientModel);
 
@@ -78,12 +74,7 @@ class ClientServiceTest {
         ClientEntity clientEntity = getClientEntity(clientId);
         ClientModel clientModelSaved = ClientMapper.toModel(clientEntity);
 
-        ClientModel clientModel = ClientModel.builder()
-                .id(clientId)
-                .cpf(clientEntity.getCpf())
-                .name("Updated Name")
-                .phone(clientEntity.getPhone())
-                .build();
+        ClientModel clientModel = getClientModel(clientId, "Updated Name", clientModelSaved.getCpf());
 
         when(clientRepository.findById(clientId)).thenReturn(Optional.ofNullable(clientModelSaved));
         when(clientRepository.save(any(ClientModel.class))).thenReturn(clientModel);
@@ -202,7 +193,7 @@ class ClientServiceTest {
                 .cpf("12341234512")
                 .phone("112313321")
                 .dateOfBirth(LocalDate.now())
-                .address(AddressModel.builder()
+                .address(AddressEntity.builder()
                         .id(UUID.randomUUID())
                         .city("Campinas")
                         .state("SP")
