@@ -7,8 +7,6 @@ import com.nithack.clientService.infra.database.model.AddressModel;
 import com.nithack.clientService.infra.database.model.ClientModel;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.UUID;
-
 @Slf4j
 public class ClientMapper {
 
