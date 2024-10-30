@@ -15,6 +15,7 @@ spring:
 springdoc:
   swagger-ui:
     enabled: true
+    path: /swagger-ui.html
   show-actuator: true
   api-docs:
     enabled: true
