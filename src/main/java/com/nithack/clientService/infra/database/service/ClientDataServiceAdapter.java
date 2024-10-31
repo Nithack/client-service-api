@@ -1,4 +1,4 @@
-package com.nithack.clientService.application.services;
+package com.nithack.clientService.infra.database.service;
 
 import com.nithack.clientService.application.mapper.ClientMapper;
 import com.nithack.clientService.application.port.ClientDataServicePort;

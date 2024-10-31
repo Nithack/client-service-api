@@ -1,3 +1,4 @@
+
 spring:
   application:
     name: client-service-api
@@ -24,3 +25,5 @@ springdoc:
 logging:
   level:
     root: INFO
+server:
+  port: ${APP_PORT}

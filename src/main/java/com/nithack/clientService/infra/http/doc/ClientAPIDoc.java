@@ -1,4 +1,4 @@
-package com.nithack.clientService.application.port;
+package com.nithack.clientService.infra.http.doc;
 
 import com.nithack.clientService.application.dto.ClientDTO;
 import com.nithack.clientService.application.dto.ErrorResponseDTO;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 import java.util.UUID;
 
-public interface ClientApiPort {
+public interface ClientAPIDoc {
 
     @Operation(summary = "Create a new client", description = "Creates a new client with the provided details.")
     @ApiResponses(value = {

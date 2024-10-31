@@ -2,7 +2,7 @@ package com.nithack.clientService.infra.http.controller;
 
 import com.nithack.clientService.application.dto.ClientDTO;
 import com.nithack.clientService.application.mapper.ClientMapper;
-import com.nithack.clientService.application.port.ClientApiPort;
+import com.nithack.clientService.infra.http.doc.ClientAPIDoc;
 import com.nithack.clientService.application.services.ClientServiceAdapter;
 import com.nithack.clientService.domain.entity.ClientEntity;
 import jakarta.validation.Valid;
@@ -25,7 +25,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/clients")
 @RequiredArgsConstructor
-public class ClientController implements ClientApiPort {
+public class ClientController implements ClientAPIDoc {
 
     private final ClientServiceAdapter clientService;
 
@@ -42,7 +42,7 @@ public class ClientController implements ClientApiPort {
     public ResponseEntity<ClientDTO> getClientById(@PathVariable UUID id) {
         Optional<ClientEntity> client = clientService.findById(id.toString());
         return client.map(value -> ResponseEntity.ok(ClientMapper.toDTO(value)))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
 
     @Override

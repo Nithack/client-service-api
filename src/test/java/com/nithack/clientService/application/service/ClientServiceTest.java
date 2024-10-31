@@ -5,7 +5,7 @@ import com.nithack.clientService.application.exception.ClientAlreadyExistsExcept
 import com.nithack.clientService.application.exception.ClientNotFoundException;
 import com.nithack.clientService.application.mapper.ClientMapper;
 import com.nithack.clientService.application.port.ClientDataServicePort;
-import com.nithack.clientService.application.services.ClientDataServiceAdapter;
+import com.nithack.clientService.infra.database.service.ClientDataServiceAdapter;
 import com.nithack.clientService.application.services.ClientServiceAdapter;
 import com.nithack.clientService.domain.entity.AddressEntity;
 import com.nithack.clientService.domain.entity.ClientEntity;
