@@ -26,4 +26,4 @@ logging:
   level:
     root: INFO
 server:
-  port: ${APP_PORT}
+  port: ${CLIENT_PORT:3030}

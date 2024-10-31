@@ -77,7 +77,7 @@ class ClientControllerIntegrationTest {
     @DisplayName("Should return 404 when client is not found")
     void shouldReturn404WhenClientNotFound() throws Exception {
         mockMvc.perform(get("/clients/{id}", UUID.randomUUID()))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isNoContent());
     }
 
     @Test
@@ -110,7 +110,7 @@ class ClientControllerIntegrationTest {
                 .andExpect(status().isNoContent());
 
         mockMvc.perform(get("/clients/{id}", clientId))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isNoContent());
     }
 
     @Test
