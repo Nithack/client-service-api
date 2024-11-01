@@ -7,6 +7,7 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 import io.swagger.v3.oas.models.tags.Tag;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,6 +15,9 @@ import java.util.List;
 
 @Configuration
 public class OpenApiConfig {
+
+    @Value("${server.port}")
+    private int port;
 
     @Bean
     public OpenAPI clientServiceOpenAPI() {
@@ -29,7 +33,7 @@ public class OpenApiConfig {
                                 .name("Apache 2.0")
                                 .url("http://springdoc.org")))
                 .servers(List.of(
-                        new Server().url("http://localhost:8080").description("Ambiente Local"),
+                        new Server().url("http://localhost:" + port).description("Ambiente Local"),
                         new Server().url("https://api.nithack.com").description("Ambiente de Produção")
                 ))
                 .tags(List.of(
